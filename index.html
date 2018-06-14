@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div {
+        width: 200px;
+        height: 200px;
+        background: red;
+        position: absolute;
+        left: 100px;
+        top: 100px;
+    }
+    #yellow {
+        background: yellow;
+        left: 400px;
+        top: 400px;
+    }
+        </style>
+</head>
+<body>
+     <div id="red"></div>
+     <div id="yellow"></div>  
+     <script>
+    function getRect(el){
+	return el.getBoundingClientRect();
+}   
+
+     document.onmousedown = function(ev){
+         //计算鼠标在red的上位置
+         disX = ev.clientX - red.offsetLeft
+         disY = ev.clientY - red.offsetTop
+         document.onmousemove = function(ev){
+            red.style.left = ev.clientX -disX +'px'
+            red.style.top = ev.clientY -disY +'px'
+           var movrded =  getRect(red)
+           var hited =  getRect(yellow)
+           if( movrded.right < hited.left||
+               movrded.bottom < hited.top||
+               movrded.left > hited.right||
+               movrded.top > hited.bottom
+
+           ){
+               console.log('没有碰撞了')
+           }else{
+                console.log('碰撞了')
+         }         
+     }
+     document.onmouseup = function(){
+        document.onmouseup = document.onmousemove = null;
+     }
+     }  
+     </script>
+</body>
+</html>
